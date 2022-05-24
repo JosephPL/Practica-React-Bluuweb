@@ -7,6 +7,8 @@ import { formValidate } from "../utils/formValidate";
 
 import FormError from "../components/FormError";
 import FormInput from "../components/FormInput";
+import Title from "../components/Title";
+import Button from "../components/Button";
 
 
 
@@ -29,31 +31,30 @@ const Login = () => {
           navegate('/');
         }catch (error) {
           console.log(error.code);
-          setError('firebase', {
-            message: erroresFirebase(error.code)
-          })
+          const {code, message} = erroresFirebase(error.code);
+        setError(code, {
+          message 
+        })
         }
     };
 
     return (
         <>
-            <h1>Login</h1>
-            <FormError error={errors.firebase}/> 
-
+            <Title text='Login'/>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormInput type="email" placeholder="Ingrese email" {...register('email', {
+                <FormInput label='Ingreasa tu correo' type="email" placeholder="Ingrese email" error={errors.email}{...register('email', {
                 required ,
                 pattern: patternEmail
                 })}></FormInput>
                 <FormError error={errors.email}/>
 
-                <FormInput type="password" placeholder="Ingrese password" {...register('password', {
+                <FormInput label='Ingresa el password' type="password" placeholder="Ingrese password" error={errors.password}{...register('password', {
               minLength,
               validate: validateTrim
             })}></FormInput>
             <FormError error={errors.password}/>
 
-                <button type="submit">Login</button>
+                <Button text='Login' type='submit'/>
             </form>
         </>
     );
