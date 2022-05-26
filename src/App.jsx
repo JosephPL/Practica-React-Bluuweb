@@ -1,14 +1,16 @@
 import {Routes , Route} from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from './context/UserProvider';
 
 import Home from './routes/Home'
 import Login from './routes/Login';
-import Navbar from './components/Navbar';
-import RequireAuth from './components/RequireAuth';
-import LayoutContainerForm from './components/LayoutContainerForm';
-
 import Register from './routes/Register';
-import { useContext } from 'react';
-import { UserContext } from './context/UserProvider';
+import Perfil from './routes/Perfil';
+import NotFound from './routes/NotFound';
+
+import Navbar from './components/Navbar';
+import LayoutContainerForm from './components/layouts/LayoutContainerForm';
+import LayoutRequireAuth from './components/layouts/LayoutRequireAuth';
 
 
 const App = () => {
@@ -22,19 +24,19 @@ const App = () => {
   return (
     <>
       <Navbar/>
-      <h1>App</h1>
-      
       <Routes>
-        <Route path='/' element={
-          <RequireAuth>
-            <Home/>
-          </RequireAuth>
-        } />
+
+        <Route path='/' element={<LayoutRequireAuth/>}>
+          <Route index element={<Home/>}/>
+          <Route path='perfil' element={<Perfil/>}/>
+        </Route>
 
         <Route path='/' element={<LayoutContainerForm/>}>
           <Route path='/login' element={ <Login/> } />
           <Route path='/register' element={<Register/> } />
         </Route>
+
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </>
   );
