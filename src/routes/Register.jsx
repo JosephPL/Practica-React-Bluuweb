@@ -62,9 +62,8 @@ const Register = () => {
               validate: validateEquals(getValues('password'))
             })}></FormInput>
             <FormError error={errors.repassword}/>
-            {
-              loading ? <ButtonLoading/> : <Button text='Register' type='submit'/>
-            }
+            
+            <Button text='Register' type='submit' loading={loading}/>
             
         </form>
     </>

@@ -56,9 +56,9 @@ const Login = () => {
               validate: validateTrim
             })}></FormInput>
             <FormError error={errors.password}/>
-            {
-              loading ? <ButtonLoading/> : <Button text='Login' type='submit'/>
-            }
+            
+            <Button text='Login' type='submit' loading={loading}/>
+            
             </form>
         </>
     );
