@@ -18,13 +18,7 @@ const Register = () => {
     const { registerUser } = useContext(UserContext)
     const {required , patternEmail, minLength, validateTrim, validateEquals} = formValidate();
 
-    const { register, handleSubmit, formState: {errors}, getValues, setError} = useForm({
-      defaultValues: {
-        email: 'test@test.com',
-        password: '123456',
-        repassword: '123456'
-      }
-    });
+    const { register, handleSubmit, formState: {errors}, getValues, setError} = useForm();
 
     const onSubmit = async ({email, password}) => {
       try{
@@ -63,7 +57,7 @@ const Register = () => {
             })}></FormInput>
             <FormError error={errors.repassword}/>
             
-            <Button text='Register' type='submit' loading={loading}/>
+            <Button text='Register' type='submit' loading={loading} color='gray'/>
             
         </form>
     </>

@@ -18,12 +18,7 @@ const Login = () => {
     const navegate = useNavigate();
     const {required , patternEmail, minLength, validateTrim} = formValidate();
 
-    const { register, handleSubmit, formState: {errors}, setError} = useForm({
-        defaultValues: {
-          email: 'test@test.com',
-          password: '123456'
-        }
-      });
+    const { register, handleSubmit, formState: {errors}, setError} = useForm();
 
     const onSubmit = async ({email, password}) => {
         try{
@@ -48,16 +43,20 @@ const Login = () => {
                 <FormInput label='Ingreasa tu correo' type="email" placeholder="Ingrese email" error={errors.email}{...register('email', {
                 required ,
                 pattern: patternEmail
-                })}></FormInput>
-                <FormError error={errors.email}/>
+                })}>
+                </FormInput>
+                <FormError error={errors.email}/> 
+                
 
                 <FormInput label='Ingresa el password' type="password" placeholder="Ingrese password" error={errors.password}{...register('password', {
               minLength,
               validate: validateTrim
-            })}></FormInput>
+            })}>
+            </FormInput>
             <FormError error={errors.password}/>
             
-            <Button text='Login' type='submit' loading={loading}/>
+            
+            <Button text='Login' type='submit' loading={loading} color='gray'/>
             
             </form>
         </>
